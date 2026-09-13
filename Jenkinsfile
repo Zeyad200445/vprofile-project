@@ -68,7 +68,7 @@ pipeline {
                    -Dsonar.sources=src/ \
                    -Dsonar.java.binaries=target/classes                   
                    -Dsonar.junit.reportPaths=target/surefire-reports/  \
-                   -Dsonar.jacoco.reportsPath=target/jacoco.exec \
+                   -Dsonar.jacoco.reportsPath=target/jacoco.exec  \
                    -Dsonar.java.checkstyle.reportPaths=target/checkstyle-result.xml'''
               }
             }
