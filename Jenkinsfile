@@ -9,7 +9,7 @@ pipeline {
     environment {
         NEXUS_VERSION       = "nexus3"
         NEXUS_PROTOCOL      = "http"
-        NEXUSIP             = "172.31.70.3"
+        NEXUSIP             = "172.31.27.151"
         NEXUSPORT           = "8081"
         NEXUS_REPOSITORY    = "maven-releases"
         NEXUS_REPOGRP_ID    = "vprofile-grp-repo"
