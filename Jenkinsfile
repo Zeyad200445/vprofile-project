@@ -1,26 +1,26 @@
 pipeline {
-    
-	agent any
+    agent any
 
-	tools {
+    tools {
         jdk "JDK21"
         maven "MAVEN3.9"
     }
-	
+
     environment {
-        NEXUS_VERSION = "nexus3"
-        NEXUS_PROTOCOL = "http"
-        NEXUS_URL = "172.31.70.3:8081"
-        NEXUS_REPOSITORY = "maven-releases"
-	NEXUS_REPOGRP_ID    = "vprofile-grp-repo"
+        NEXUS_VERSION       = "nexus3"
+        NEXUS_PROTOCOL      = "http"
+        NEXUSIP             = "172.31.70.3"
+        NEXUSPORT           = "8081"
+        NEXUS_REPOSITORY    = "maven-releases"
+        NEXUS_REPOGRP_ID    = "vprofile-grp-repo"
         NEXUS_CREDENTIAL_ID = "nexuslogin"
-        ARTVERSION = "${env.BUILD_ID}"
+        ARTVERSION          = "${env.BUILD_ID}"
     }
-	
+
     stages {
-        stage('Build'){
+        stage('Build') {
             steps {
-                sh 'mvn -s settings.xml -DskipTests install'
+                sh "mvn -s settings.xml -DskipTests install -DNEXUSIP=${NEXUSIP} -DNEXUSPORT=${NEXUSPORT} -DNEXUS-GRP-REPO=${NEXUS_REPOGRP_ID}"
             }
             post {
                 success {
@@ -30,20 +30,16 @@ pipeline {
             }
         }
 
-        stage('Test'){
+        stage('Test') {
             steps {
-                sh 'mvn -s settings.xml test'
+                sh "mvn -s settings.xml test -DNEXUSIP=${NEXUSIP} -DNEXUSPORT=${NEXUSPORT} -DNEXUS-GRP-REPO=${NEXUS_REPOGRP_ID}"
             }
-
         }
 
-        stage('Checkstyle Analysis'){
+        stage('Checkstyle Analysis') {
             steps {
-                sh 'mvn -s settings.xml checkstyle:checkstyle'
+                sh "mvn -s settings.xml checkstyle:checkstyle -DNEXUSIP=${NEXUSIP} -DNEXUSPORT=${NEXUSPORT} -DNEXUS-GRP-REPO=${NEXUS_REPOGRP_ID}"
             }
         }
     }
-
-
-
 }
