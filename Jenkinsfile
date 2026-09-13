@@ -5,7 +5,6 @@ pipeline {
 	tools {
         jdk "JDK21"
         maven "MAVEN3.9"
-
     }
 	
     environment {
