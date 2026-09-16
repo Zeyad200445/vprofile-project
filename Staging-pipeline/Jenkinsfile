@@ -24,7 +24,7 @@ pipeline {
         registryCredential = 'ecr:us-east-1:AWS-Credential-login-ecr'
         appRegistry = '493582806047.dkr.ecr.us-east-1.amazonaws.com/vprofile-cicd'
         vprofileRegistry = "https://493582806047.dkr.ecr.us-east-1.amazonaws.com"
-        cluster = "vprofile-cluster-staging"
+        cluster = "vprofile-Staging-cluster"
         service = "vprofile-app-task-service"
     }
 
