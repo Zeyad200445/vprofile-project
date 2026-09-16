@@ -30,7 +30,7 @@
     <mirror>
       <id>${env.CENTRAL_REPO}</id>
       <name>${env.CENTRAL_REPO}</name>
-      <url><url>http://${env.NEXUSIP}:${env.NEXUSPORT}/repository/${env.NEXUS_GRP_REPO}/</url>/</url>
+      <url>http://${env.NEXUSIP}:${env.NEXUSPORT}/repository/${env.NEXUS_GRP_REPO}/</url>
       <mirrorOf>*</mirrorOf>
     </mirror>
   </mirrors>
