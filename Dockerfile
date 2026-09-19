@@ -1,7 +1,7 @@
 FROM eclipse-temurin:21-jdk AS build-image 
 RUN apt update && apt install maven -y
 COPY ./ vprofile-project 
-RUN cd vprofile-projcet && mvn install
+RUN cd vprofile-project && mvn install
 
 FROM tomcat:10-jdk21
 LABEL "Project"="Vprofile"
