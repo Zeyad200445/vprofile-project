@@ -14,7 +14,7 @@ jobs:
          java-version: '21'
 
       - name: Maven test
-        run: mvn test
+        run: mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent test org.jacoco:jacoco-maven-plugin:report
 
       - name: Checkstyle
         run: mvn checkstyle:checkstyle
