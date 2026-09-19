@@ -60,8 +60,8 @@ jobs:
         uses: appleboy/docker-ecr-action@master
         with:
          access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
-         secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-         registry: ${{ secrets.REGISTRY }}
+         secret_key: ${{ secrets.AWS_SECRET_KEY_ID }}
+         registry: ${{ secrets.ECR_REGISTRY }}
          repo: actapp
          region: ${{ env.AWS_REGION }}
          tags: latest,${{ github.run_number }}
