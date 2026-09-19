@@ -56,15 +56,25 @@ jobs:
           sed -i "s/^jdbc.password.*$/jdbc.password\=${{ secrets.RDS_PASS }}/" src/main/resources/application.properties
           sed -i "s/db01/${{ secrets.RDS_ENDPOINT }}/" src/main/resources/application.properties
 
-      - name: Build & Upload image to ECR
-        uses: appleboy/docker-ecr-action@master
+       # 1. تسجيل الدخول في AWS باستخدام الأداة الرسمية
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
         with:
-          access_key: ${{ secrets.AWS_ACESS_KEY_ID }} # تم تعديلها لتطابق الصورة
-          secret_key: ${{ secrets.AWS_SECRET_KEY_ID }} # تم تعديلها لتطابق الصورة
-          registry: ${{ secrets.ECR_REGISTRY }}
-          repo: actapp
-          region: ${{ env.AWS_REGION }}
-          tags: latest,${{ github.run_number }}
-          daemon_off: false
-          dockerfile: ./Dockerfile
-          context: ./
+          aws-access-key-id: ${{ secrets.AWS_ACESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY_ID }}
+          aws-region: us-east-1
+
+      # 2. فتح الاتصال مع مستودع ECR
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      # 3. بناء ورفع الصورة بأوامر دوكر العادية
+      - name: Build, tag, and push image to Amazon ECR
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: actapp
+          IMAGE_TAG: latest
+        run: |
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
