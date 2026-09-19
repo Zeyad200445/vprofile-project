@@ -25,6 +25,8 @@ jobs:
     # Setup sonar-scanner
       - name: Setup SonarQube
         uses: warchant/setup-sonar-scanner@v7
+        with:
+          version: '6.2.2.4839'
    
     # Run sonar-scanner
       - name: SonarQube Scan
