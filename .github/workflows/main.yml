@@ -8,6 +8,8 @@ jobs:
     steps:
       - name: Code checkout
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
 
       - name: Set Java 21
         uses: actions/setup-java@v4
