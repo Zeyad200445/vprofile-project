@@ -7,6 +7,12 @@ jobs:
       - name: Code checkout
         uses: actions/checkout@v4
 
+      - name: Set Java 21
+        uses: actions/setup-java@v4
+        with:
+         distribution: 'temurin' # See 'Supported distributions' for available options
+         java-version: '21'
+
       - name: Maven test
         run: mvn test
 
@@ -14,11 +20,7 @@ jobs:
         run: mvn checkstyle:checkstyle
 
       # Setup java 11 to be default (sonar-scanner requirement as of 5.x)
-      - name: Set Java 21
-        uses: actions/setup-java@v3
-        with:
-         distribution: 'temurin' # See 'Supported distributions' for available options
-         java-version: '21'
+      
 
     # Setup sonar-scanner
       - name: Setup SonarQube
