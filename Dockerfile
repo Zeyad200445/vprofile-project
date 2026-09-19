@@ -1,4 +1,4 @@
-FROM eclipse-temurin:21-jdk AS build-image
+FROM eclipse-temurin:21-jdk AS build-image 
 RUN apt update && apt install maven -y
 COPY ./ vprofile-project 
 RUN cd vprofile-projcet && mvn install
