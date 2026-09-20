@@ -59,6 +59,7 @@ jobs:
           sed -i "s/db01/${{ secrets.RDS_ENDPOINT }}/" src/main/resources/application.properties
           sed -i 's/mc01/mc01.vprofile.local/g' src/main/resources/application.properties
           sed -i  's/rmq01/rmq01.vprofile.local/g' src/main/resources/application.properties
+          sed -i '$a spring.autoconfigure.exclude=org.springframework.boot.autoconfigure.amqp.RabbitAutoConfiguration' src/main/resources/application.properties
 
        # 1. تسجيل الدخول في AWS باستخدام الأداة الرسمية
       - name: Configure AWS credentials
