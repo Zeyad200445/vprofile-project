@@ -57,6 +57,8 @@ jobs:
           sed -i "s/^jdbc.username.*$/jdbc.username\=${{ secrets.RDS_USER }}/" src/main/resources/application.properties
           sed -i "s/^jdbc.password.*$/jdbc.password\=${{ secrets.RDS_PASSWORD }}/" src/main/resources/application.properties
           sed -i "s/db01/${{ secrets.RDS_ENDPOINT }}/" src/main/resources/application.properties
+          sed -i 's/mc01/mc01.vprofile.local/g' src/main/resources/application.properties
+          sed -i  's/rmq01/rmq01.vprofile.local/g' src/main/resources/application.properties
 
        # 1. تسجيل الدخول في AWS باستخدام الأداة الرسمية
       - name: Configure AWS credentials
